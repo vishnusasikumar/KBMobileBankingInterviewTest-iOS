@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
-import Foundation // Required for Date and DateFormatter
-
 
 @main
 struct KBMobileBankingInterviewTestApp: App {
+
+    init() {
+        DI.assemble(assemblies: AppDIAssembly.all)
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.light)
         }
     }
 }

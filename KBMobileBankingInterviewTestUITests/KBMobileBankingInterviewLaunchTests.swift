@@ -1,5 +1,5 @@
 //
-//  KBMobileBankingInterviewTestUITestsLaunchTests.swift
+//  KBMobileBankingInterviewLaunchTests.swift
 //  KBMobileBankingInterviewTestUITests
 //
 //  Created by Lucan McIver on 21/07/2025.
@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class KBMobileBankingInterviewTestUITestsLaunchTests: XCTestCase {
+class KBMobileBankingInterviewLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            //Build your screen :)
+        ZStack {
+            TransactionsListView(viewModel: DI.resolve(TransactionsListViewModel.self))
         }
-        .padding()
     }
 }
 
