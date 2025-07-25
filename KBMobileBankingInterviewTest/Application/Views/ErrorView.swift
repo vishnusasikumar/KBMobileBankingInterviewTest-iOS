@@ -19,15 +19,21 @@ struct ErrorView: View {
                         .fontWeight(.medium)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
+                        .accessibilityLabel("Error message")
+                        .accessibilityHint("Describes that something went wrong and the user can try again later.")
+
                     Button("Reload Users") {
                         Task {
                             await viewModel.refresh()
                         }
                     }
                     .buttonStyle(.bordered)
+                    .accessibilityLabel("Reload Button")
+                    .accessibilityHint("Reloads the user list.")
                 }
 
             }
+            .accessibilityElement(children: .contain)
     }
 }
 

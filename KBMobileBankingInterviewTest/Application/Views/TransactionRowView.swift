@@ -18,21 +18,36 @@ struct TransactionRowView: View {
                     .lineLimit(1)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal)
+                    .accessibilityLabel(Text("Transaction date"))
+                    .accessibilityValue(Text(transaction.date.getDateString()))
+                    .accessibilityHint(Text("The date the transaction occurred"))
+
                 Text(transaction.description)
                     .font(.title3)
                     .lineLimit(1)
                     .multilineTextAlignment(.leading)
+                    .accessibilityLabel(Text("Transaction description"))
+                    .accessibilityValue(Text(transaction.description))
+                    .accessibilityHint(Text("Description of the transaction"))
+
                 Spacer()
+
                 Text(transaction.amount, format: .currency(code: "NZD"))
                     .font(.title3)
                     .bold()
                     .lineLimit(1)
                     .foregroundStyle(transaction.amount > 0 ? .green : .red)
+                    .accessibilityLabel(Text("Transaction amount"))
+                    .accessibilityValue(Text(transaction.amount, format: .currency(code: "NZD")))
+                    .accessibilityHint(Text("Amount of the transaction, in NZD"))
             }
             Divider()
         }
         .padding(.top, 5)
         .padding(.bottom, 5)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("Transaction row"))
+        .accessibilityHint(Text("Contains details about the transaction, such as date, description, and amount"))
     }
 }
 

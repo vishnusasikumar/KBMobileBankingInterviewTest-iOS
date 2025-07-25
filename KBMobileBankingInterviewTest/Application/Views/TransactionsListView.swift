@@ -18,22 +18,36 @@ struct TransactionsListView: View {
                     ActivityIndicator()
                         .frame(width: 100, height: 100)
                         .foregroundColor(.accentColor)
+                        .accessibilityLabel(Text("Loading transactions"))
+                        .accessibilityHint(Text("Wait while transactions are loading"))
+
             case .failed:
                     ErrorView(viewModel: viewModel)
+                        .accessibilityLabel(Text("Error loading transactions"))
+                        .accessibilityHint(Text("An error occurred while fetching transactions"))
+
             case .idle, .loaded:
                     ScrollView(.vertical) {
                         VStack(alignment: .leading, spacing: 12) {
                             Text(viewModel.title)
                                 .font(.system(size: 32, weight: .bold))
                                 .padding(.top)
+                                .accessibilityLabel(Text(viewModel.title))
+                                .accessibilityHint(Text("Title of the transaction list"))
+
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading, spacing: 1) {
                                     Text(viewModel.income)
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(.green)
+                                        .accessibilityLabel(Text(viewModel.income))
+                                        .accessibilityHint(Text("Total income"))
+
                                     Text(viewModel.expenses)
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(.red)
+                                        .accessibilityLabel(Text(viewModel.expenses))
+                                        .accessibilityHint(Text("Total expenses"))
                                 }
                                 .padding(.leading, 60)
                                 Spacer()
@@ -44,9 +58,13 @@ struct TransactionsListView: View {
                             ForEach(viewModel.filteredTransactions) { transaction in
                                 VStack(spacing: 1) {
                                     TransactionRowView(transaction: transaction)
+                                        .accessibilityElement(children: .combine)
+                                        .accessibilityLabel(Text(transaction.description))
+                                        .accessibilityHint(Text("Transaction details"))
                                 }
                                 .tag(transaction.description)
                                 .listRowSeparator(.hidden)
+                                .accessibilityIdentifier("Transaction-\(transaction.id)")
                             }
                         }
                     }
@@ -73,6 +91,8 @@ struct TransactionsListView: View {
             Toggle("Enable Date Filtering", isOn: $viewModel.showDateFilter)
                 .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                 .padding()
+                .accessibilityLabel(Text("Enable or disable date filtering"))
+                .accessibilityHint(Text("Toggle to filter transactions by date"))
 
             if viewModel.showDateFilter {
                 HStack {
@@ -80,21 +100,27 @@ struct TransactionsListView: View {
                         Text("Start Date")
                             .font(.body)
                             .foregroundStyle(.secondary)
+                            .accessibilityLabel(Text("Start date"))
+                            .accessibilityHint(Text("Select the start date for transaction filtering"))
                     }
                     .datePickerStyle(CompactDatePickerStyle())
                     .onChange(of: viewModel.startDate, { _, _ in
                         viewModel.filterTransactions()
                     })
+                    .accessibilityIdentifier("StartDatePicker")
 
                     DatePicker(selection: $viewModel.endDate, displayedComponents: .date) {
                         Text("End Date")
                             .font(.body)
                             .foregroundStyle(.secondary)
+                            .accessibilityLabel(Text("End date"))
+                            .accessibilityHint(Text("Select the end date for transaction filtering"))
                     }
                     .datePickerStyle(CompactDatePickerStyle())
                     .onChange(of: viewModel.endDate, { _, _ in
                         viewModel.filterTransactions()
                     })
+                    .accessibilityIdentifier("EndDatePicker")
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
