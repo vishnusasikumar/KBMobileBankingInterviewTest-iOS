@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol GetListsUseCaseProtocol {
-    func getListItems() async -> [Transaction]
+protocol GetTransactionsUseCaseProtocol {
+    func getListItems() async -> [TransactionModel]
 }
 
-struct GetListsUseCase: GetListsUseCaseProtocol {
+struct GetListsUseCase: GetTransactionsUseCaseProtocol {
     var repo: TransactionsRepositoryProtocol
 
-    func getListItems() async -> [Transaction] {
+    func getListItems() async -> [TransactionModel] {
         do {
             return try await repo.getTransactions()
         } catch let error {

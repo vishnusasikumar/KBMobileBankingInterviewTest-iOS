@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TransactionRowView: View {
-    var transaction: Transaction
+    var transaction: TransactionModel
 
     var body: some View {
         VStack(alignment: .leading) {

@@ -11,6 +11,6 @@ import SwinjectAutoregistration
 
 struct UseCaseAssembly: Assembly {
     func assemble(container: Swinject.Container) {
-        container.autoregister(GetListsUseCaseProtocol.self, initializer: GetListsUseCase.init)
+        container.autoregister(GetTransactionsUseCaseProtocol.self, initializer: GetListsUseCase.init)
     }
 }

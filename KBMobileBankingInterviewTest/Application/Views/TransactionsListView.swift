@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionsListView: View {
     @ObservedObject var viewModel: TransactionsListViewModel
-    @State private var selectedItem: Transaction?
+    @State private var selectedItem: TransactionModel?
 
     var body: some View {
         ZStack {

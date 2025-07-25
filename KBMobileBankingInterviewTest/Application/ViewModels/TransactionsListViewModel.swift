@@ -22,36 +22,34 @@ class TransactionsListViewModel: ObservableObject {
         case refreshButton
     }
 
-    @Published private(set) var transactions: [Transaction] = []
-    @Published private(set) var state = ViewState.idle
+    @Published var transactions: [TransactionModel] = []
+    @Published var state = ViewState.idle
     @Published var showDateFilter = false {
         didSet {
             filterTransactions()
         }
     }
 
-    @Published var filteredTransactions: [Transaction] = []
+    @Published var filteredTransactions: [TransactionModel] = []
     @Published var startDate: Date = Date()
     @Published var endDate: Date = Date()
 
-    private var getItemsUseCase: GetListsUseCaseProtocol
+    private var getTransactionsUseCase: GetTransactionsUseCaseProtocol
 
-    init(getItemsUseCase: GetListsUseCaseProtocol) {
-        self.getItemsUseCase = getItemsUseCase
+    init(getTransactionsUseCase: GetTransactionsUseCaseProtocol) {
+        self.getTransactionsUseCase = getTransactionsUseCase
     }
 
     @MainActor
     func getNextItems() async {
         state = .loading
-        Task {
-            let array = await getItemsUseCase.getListItems()
-            if array.isEmpty {
-                self.state = .failed
-            } else {
-                self.transactions = array
-                filterTransactions()
-                self.state = .loaded
-            }
+        let array = await getTransactionsUseCase.getListItems()
+        if array.isEmpty {
+            self.state = .failed
+        } else {
+            self.transactions = array
+            filterTransactions()
+            self.state = .loaded
         }
     }
 
@@ -62,8 +60,7 @@ class TransactionsListViewModel: ObservableObject {
 
     func filterTransactions() {
         if !showDateFilter || checkDates() {
-            filteredTransactions = transactions
-                .sorted { $0.date < $1.date }
+            setFilteredTransactions(transactions.sorted { $0.date < $1.date })
             return
         }
         filteredTransactions = transactions.filter { transaction in
@@ -81,6 +78,15 @@ class TransactionsListViewModel: ObservableObject {
         let currentDay = calendar.startOfDay(for: currentDate)
 
         return startDay == currentDay && endDay == currentDay
+    }
+
+    private func setFilteredTransactions(_ transactions: [TransactionModel]) {
+        filteredTransactions = transactions
+        if let firstTransaction = transactions.first,
+           let lastTransaction = transactions.last {
+            startDate = firstTransaction.date
+            endDate = lastTransaction.date
+        }
     }
 
     var title: String {

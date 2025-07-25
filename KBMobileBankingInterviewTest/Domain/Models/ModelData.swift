@@ -9,7 +9,7 @@ import Foundation
 
 @Observable
 class ModelData {
-    var items: [Transaction] {
+    var items: [TransactionModel] {
         return staticTransactions()
     }
 

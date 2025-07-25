@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TransactionsRepositoryProtocol {
-    func getTransactions() async throws -> [Transaction]
+    func getTransactions() async throws -> [TransactionModel]
 }
 
 struct TransactionsRepository: TransactionsRepositoryProtocol {
@@ -18,9 +18,9 @@ struct TransactionsRepository: TransactionsRepositoryProtocol {
         self.service = service
     }
 
-    func getTransactions() async throws -> [Transaction] {
+    func getTransactions() async throws -> [TransactionModel] {
         do {
-            let result: Result<[Transaction], APIError> = try await service.request()
+            let result: Result<[TransactionModel], APIError> = try await service.request()
             switch result {
             case .success(let items):
                 return items

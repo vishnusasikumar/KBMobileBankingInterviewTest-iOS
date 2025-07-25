@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		844FFCBA2E324ABB0032CF0E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 844FFCB92E324ABB0032CF0E /* Swinject */; };
 		844FFD202E3251C80032CF0E /* SwinjectAutoregistration in Frameworks */ = {isa = PBXBuildFile; productRef = 844FFD1F2E3251C80032CF0E /* SwinjectAutoregistration */; };
+		849D8C062E339EFC00A7C19E /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 849D8C052E339EFC00A7C19E /* ViewInspector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,23 @@
 		58C17A972E2E07B100E96417 /* Example 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Example 2.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		849D8BF72E3376A300A7C19E /* Exceptions for "KBMobileBankingInterviewTestTests" folder in "KBMobileBankingInterviewTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				KBMockResponse.json,
+			);
+			target = 58C17A4D2E2DF2F100E96417 /* KBMobileBankingInterviewTest */;
+		};
+		849D8BF82E3376A300A7C19E /* Exceptions for "KBMobileBankingInterviewTestTests" folder in "KBMobileBankingInterviewTestUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				KBMockResponse.json,
+			);
+			target = 58C17A642E2DF2F200E96417 /* KBMobileBankingInterviewTestUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		58C17A502E2DF2F100E96417 /* KBMobileBankingInterviewTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -45,6 +63,10 @@
 		};
 		58C17A5E2E2DF2F200E96417 /* KBMobileBankingInterviewTestTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				849D8BF72E3376A300A7C19E /* Exceptions for "KBMobileBankingInterviewTestTests" folder in "KBMobileBankingInterviewTest" target */,
+				849D8BF82E3376A300A7C19E /* Exceptions for "KBMobileBankingInterviewTestTests" folder in "KBMobileBankingInterviewTestUITests" target */,
+			);
 			path = KBMobileBankingInterviewTestTests;
 			sourceTree = "<group>";
 		};
@@ -69,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849D8C062E339EFC00A7C19E /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +174,7 @@
 			);
 			name = KBMobileBankingInterviewTestTests;
 			packageProductDependencies = (
+				849D8C052E339EFC00A7C19E /* ViewInspector */,
 			);
 			productName = KBMobileBankingInterviewTestTests;
 			productReference = 58C17A5B2E2DF2F200E96417 /* KBMobileBankingInterviewTestTests.xctest */;
@@ -215,6 +239,7 @@
 				844FFCB82E324ABB0032CF0E /* XCRemoteSwiftPackageReference "Swinject" */,
 				844FFD0D2E324C700032CF0E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				844FFD1E2E3251C80032CF0E /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */,
+				849D8C042E339EFC00A7C19E /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 58C17A4F2E2DF2F100E96417 /* Products */;
@@ -627,6 +652,14 @@
 				minimumVersion = 2.9.1;
 			};
 		};
+		849D8C042E339EFC00A7C19E /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -639,6 +672,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 844FFD1E2E3251C80032CF0E /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */;
 			productName = SwinjectAutoregistration;
+		};
+		849D8C052E339EFC00A7C19E /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 849D8C042E339EFC00A7C19E /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
