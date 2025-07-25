@@ -1,20 +1,22 @@
 import Foundation
 
+class TransactionsApiService: NetworkServiceProtocol {
+    public func request<T: Decodable>() async throws -> Result<T, APIError> {
+        // Simulate a network delay
+        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000) // 2 seconds
+        if let transactions = staticTransactions() as? T {
+            return .success(transactions)
+        } else {
+            throw APIError.error_400
+        }
+    }
 
-protocol TransactionsApiMock {
-    //Return transactions list using your preferred async framework if you would like
-    func fetchTransactions() async -> [Transaction]
-}
-
-class TransactionsApiMockImplementation: TransactionsApiMock {
-    func fetchTransactions() async -> [Transaction] {
-        await getTransactions()
+    func cancelAllTasks() {
+        // mock cancel all session tasks
     }
 }
 
-private func getTransactions() async -> [Transaction] {
-    // Simulate a network delay
-    try? await Task.sleep(nanoseconds: 2 * 1_000_000_000) // 2 seconds
+public func staticTransactions() -> [Transaction] {
 
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -56,6 +58,6 @@ private func getTransactions() async -> [Transaction] {
         Transaction(date: createDate(from: "2025-07-29"), description: "Groceries", amount: -85.00),
         Transaction(date: createDate(from: "2025-07-16"), description: "Restaurant", amount: -40.00),
         Transaction(date: createDate(from: "2025-07-03"), description: "Restaurant", amount: -35.00),
-        Transaction(date: createDate(from: "2025-07-04"), description: "Gas Station", amount: -60.00),
+        Transaction(date: createDate(from: "2025-07-04"), description: "Gas Station", amount: -60.00)
     ]
 }
