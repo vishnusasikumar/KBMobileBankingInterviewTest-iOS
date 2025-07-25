@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		844FFCBA2E324ABB0032CF0E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 844FFCB92E324ABB0032CF0E /* Swinject */; };
+		844FFD202E3251C80032CF0E /* SwinjectAutoregistration in Frameworks */ = {isa = PBXBuildFile; productRef = 844FFD1F2E3251C80032CF0E /* SwinjectAutoregistration */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		58C17A5C2E2DF2F200E96417 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -55,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844FFCBA2E324ABB0032CF0E /* Swinject in Frameworks */,
+				844FFD202E3251C80032CF0E /* SwinjectAutoregistration in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +115,7 @@
 				58C17A4A2E2DF2F100E96417 /* Sources */,
 				58C17A4B2E2DF2F100E96417 /* Frameworks */,
 				58C17A4C2E2DF2F100E96417 /* Resources */,
+				8454158D2E330B5700273EB2 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -118,6 +126,8 @@
 			);
 			name = KBMobileBankingInterviewTest;
 			packageProductDependencies = (
+				844FFCB92E324ABB0032CF0E /* Swinject */,
+				844FFD1F2E3251C80032CF0E /* SwinjectAutoregistration */,
 			);
 			productName = KBMobileBankingInterviewTest;
 			productReference = 58C17A4E2E2DF2F100E96417 /* KBMobileBankingInterviewTest.app */;
@@ -201,6 +211,11 @@
 			);
 			mainGroup = 58C17A452E2DF2F100E96417;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				844FFCB82E324ABB0032CF0E /* XCRemoteSwiftPackageReference "Swinject" */,
+				844FFD0D2E324C700032CF0E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				844FFD1E2E3251C80032CF0E /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 58C17A4F2E2DF2F100E96417 /* Products */;
 			projectDirPath = "";
@@ -236,6 +251,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8454158D2E330B5700273EB2 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58C17A4A2E2DF2F100E96417 /* Sources */ = {
@@ -312,7 +349,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -375,7 +412,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -415,9 +452,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwibank.interview.KBMobileBankingInterviewTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -442,9 +483,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwibank.interview.KBMobileBankingInterviewTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -556,6 +601,46 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		844FFCB82E324ABB0032CF0E /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+		844FFD0D2E324C700032CF0E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.59.1;
+			};
+		};
+		844FFD1E2E3251C80032CF0E /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/SwinjectAutoregistration.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		844FFCB92E324ABB0032CF0E /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 844FFCB82E324ABB0032CF0E /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		844FFD1F2E3251C80032CF0E /* SwinjectAutoregistration */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 844FFD1E2E3251C80032CF0E /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */;
+			productName = SwinjectAutoregistration;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58C17A462E2DF2F100E96417 /* Project object */;
 }
