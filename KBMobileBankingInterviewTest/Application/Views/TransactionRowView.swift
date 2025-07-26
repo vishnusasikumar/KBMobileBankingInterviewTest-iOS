@@ -21,6 +21,7 @@ struct TransactionRowView: View {
                     .accessibilityLabel(Text("Transaction date"))
                     .accessibilityValue(Text(transaction.date.getDateString()))
                     .accessibilityHint(Text("The date the transaction occurred"))
+                    .accessibilityIdentifier(ScreenIdentifier.ViewID.rowDate.rawValue)
 
                 Text(transaction.description)
                     .font(.title3)
@@ -29,6 +30,7 @@ struct TransactionRowView: View {
                     .accessibilityLabel(Text("Transaction description"))
                     .accessibilityValue(Text(transaction.description))
                     .accessibilityHint(Text("Description of the transaction"))
+                    .accessibilityIdentifier(ScreenIdentifier.ViewID.rowDescription.rawValue)
 
                 Spacer()
 
@@ -40,6 +42,7 @@ struct TransactionRowView: View {
                     .accessibilityLabel(Text("Transaction amount"))
                     .accessibilityValue(Text(transaction.amount, format: .currency(code: "NZD")))
                     .accessibilityHint(Text("Amount of the transaction, in NZD"))
+                    .accessibilityIdentifier(ScreenIdentifier.ViewID.rowAmount.rawValue)
             }
             Divider()
         }

@@ -11,7 +11,7 @@ struct TransactionsListView: View {
     @ObservedObject var viewModel: TransactionsListViewModel
     @State private var selectedItem: TransactionModel?
 
-    typealias ViewID = TransactionsListViewModel.ViewID
+    typealias ViewID = ScreenIdentifier.ViewID
 
     var body: some View {
         ZStack {
@@ -22,11 +22,13 @@ struct TransactionsListView: View {
                         .foregroundColor(.accentColor)
                         .accessibilityLabel(Text("Loading transactions"))
                         .accessibilityHint(Text("Wait while transactions are loading"))
+                        .accessibilityIdentifier(ViewID.loadingView.rawValue)
 
             case .failed:
                     ErrorView(viewModel: viewModel)
                         .accessibilityLabel(Text("Error loading transactions"))
                         .accessibilityHint(Text("An error occurred while fetching transactions"))
+                        .accessibilityIdentifier(ViewID.errorView.rawValue)
 
             case .idle, .loaded:
                     ScrollView(.vertical) {
@@ -60,16 +62,17 @@ struct TransactionsListView: View {
 
                             datePicker
 
-                            ForEach(viewModel.filteredTransactions) { transaction in
+                            ForEach(viewModel.filteredTransactions.indices, id: \.self) { index in
+                                let transaction = viewModel.filteredTransactions[index]
                                 VStack(spacing: 1) {
                                     TransactionRowView(transaction: transaction)
                                         .accessibilityElement(children: .combine)
                                         .accessibilityLabel(Text(transaction.description))
                                         .accessibilityHint(Text("Transaction details"))
+                                        .accessibilityIdentifier("\(ViewID.transactionRowPrefix.rawValue)\(index)")
                                 }
                                 .tag(transaction.description)
                                 .listRowSeparator(.hidden)
-                                .accessibilityIdentifier("\(ViewID.transactionRowPrefix.rawValue)\(transaction.description)")
                             }
                         }
                     }
