@@ -17,12 +17,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
-      - name: Set up Xcode
-        uses: apple-actions/setup-xcode@v2
-        with:
-          xcode-version: '16.2'
+      - name: Select Xcode 16.2
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
 
       - name: Show current Xcode version
         run: |
@@ -49,7 +47,7 @@ jobs:
           xcodebuild test -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: result.log
@@ -59,7 +57,7 @@ jobs:
           xcodebuild archive -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -archivePath $PWD/build/KBMobileBankingInterviewTest.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
           path: $PWD/build/KBMobileBankingInterviewTest.xcarchive
