@@ -58,7 +58,7 @@ jobs:
 
       - name: Archive Build
         run: |
-          xcodebuild -exportArchive -archivePath ./build/KBMobileBankingInterviewTest.xcarchive -exportPath ./build/ipa -exportOptionsPlist ./ExportOptions.plist
+          xcodebuild -exportArchive -archivePath ./build/KBMobileBankingInterviewTest.xcarchive -exportPath ./build/ipa
           
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
