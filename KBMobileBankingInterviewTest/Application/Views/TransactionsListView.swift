@@ -11,6 +11,8 @@ struct TransactionsListView: View {
     @ObservedObject var viewModel: TransactionsListViewModel
     @State private var selectedItem: TransactionModel?
 
+    typealias ViewID = TransactionsListViewModel.ViewID
+
     var body: some View {
         ZStack {
             switch viewModel.state {
@@ -34,6 +36,7 @@ struct TransactionsListView: View {
                                 .padding(.top)
                                 .accessibilityLabel(Text(viewModel.title))
                                 .accessibilityHint(Text("Title of the transaction list"))
+                                .accessibilityIdentifier(ViewID.title.rawValue)
 
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading, spacing: 1) {
@@ -42,12 +45,14 @@ struct TransactionsListView: View {
                                         .foregroundColor(.green)
                                         .accessibilityLabel(Text(viewModel.income))
                                         .accessibilityHint(Text("Total income"))
+                                        .accessibilityIdentifier(ViewID.incomeLabel.rawValue)
 
                                     Text(viewModel.expenses)
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(.red)
                                         .accessibilityLabel(Text(viewModel.expenses))
                                         .accessibilityHint(Text("Total expenses"))
+                                        .accessibilityIdentifier(ViewID.expenseLabel.rawValue)
                                 }
                                 .padding(.leading, 60)
                                 Spacer()
@@ -64,7 +69,7 @@ struct TransactionsListView: View {
                                 }
                                 .tag(transaction.description)
                                 .listRowSeparator(.hidden)
-                                .accessibilityIdentifier("Transaction-\(transaction.id)")
+                                .accessibilityIdentifier("\(ViewID.transactionRowPrefix.rawValue)\(transaction.description)")
                             }
                         }
                     }
@@ -76,7 +81,7 @@ struct TransactionsListView: View {
                     .navigationTitle(viewModel.title)
                     .accessibilityLabel(Text("List of transactions"))
                     .accessibilityHint(Text("Show a list of transactions"))
-                    .accessibilityIdentifier(TransactionsListViewModel.ViewID.mainList.rawValue)
+                    .accessibilityIdentifier(ViewID.mainList.rawValue)
             }
         }
         .onAppear {
@@ -93,6 +98,7 @@ struct TransactionsListView: View {
                 .padding()
                 .accessibilityLabel(Text("Enable or disable date filtering"))
                 .accessibilityHint(Text("Toggle to filter transactions by date"))
+                .accessibilityIdentifier(ViewID.enableDateFilterToggle.rawValue)
 
             if viewModel.showDateFilter {
                 HStack {
@@ -107,7 +113,7 @@ struct TransactionsListView: View {
                     .onChange(of: viewModel.startDate, { _, _ in
                         viewModel.filterTransactions()
                     })
-                    .accessibilityIdentifier("StartDatePicker")
+                    .accessibilityIdentifier(ViewID.startDatePicker.rawValue)
 
                     DatePicker(selection: $viewModel.endDate, displayedComponents: .date) {
                         Text("End Date")
@@ -120,7 +126,7 @@ struct TransactionsListView: View {
                     .onChange(of: viewModel.endDate, { _, _ in
                         viewModel.filterTransactions()
                     })
-                    .accessibilityIdentifier("EndDatePicker")
+                    .accessibilityIdentifier(ViewID.endDatePicker.rawValue)
                 }
                 .padding(.horizontal)
                 .padding(.bottom)

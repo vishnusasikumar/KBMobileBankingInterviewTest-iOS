@@ -19,7 +19,15 @@ class TransactionsListViewModel: ObservableObject {
 
     enum ViewID: String {
         case mainList
-        case refreshButton
+        case title
+        case incomeLabel
+        case expenseLabel
+        case startDatePicker
+        case endDatePicker
+        case enableDateFilterToggle
+        case transactionRowPrefix = "Transaction-" // for dynamic identifiers
+        case loadingView
+        case errorView
     }
 
     @Published var transactions: [TransactionModel] = []

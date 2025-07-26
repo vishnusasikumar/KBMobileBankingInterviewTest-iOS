@@ -89,8 +89,8 @@ final class TransactionsListViewTests: XCTestCase {
         let toggle = try sut.inspect().find(ViewType.Toggle.self)
         XCTAssertEqual(try toggle.labelView().text().string(), "Enable Date Filtering")
 
-        let startPicker = try sut.inspect().find(viewWithAccessibilityIdentifier: "StartDatePicker")
-        let endPicker = try sut.inspect().find(viewWithAccessibilityIdentifier: "EndDatePicker")
+        let startPicker = try sut.inspect().find(viewWithAccessibilityIdentifier: TransactionsListViewModel.ViewID.startDatePicker.rawValue)
+        let endPicker = try sut.inspect().find(viewWithAccessibilityIdentifier: TransactionsListViewModel.ViewID.endDatePicker.rawValue)
 
         XCTAssertNotNil(startPicker)
         XCTAssertNotNil(endPicker)
