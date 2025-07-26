@@ -32,7 +32,7 @@ jobs:
 
       - name: Clean Xcode build
         run: |
-          xcodebuild clean -project Cashpoints.xcodeproj -scheme Cashpoints-Staging
+          xcodebuild clean -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest
 
       - name: Resolve Swift Package Dependencies
         run: |
@@ -40,11 +40,11 @@ jobs:
 
       - name: Build the Project
         run: |
-          xcodebuild clean build -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild clean build -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: Run Unit Tests
         run: |
-          xcodebuild test -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
+          xcodebuild test -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
@@ -54,7 +54,7 @@ jobs:
 
       - name: Archive Build
         run: |
-          xcodebuild archive -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -archivePath $PWD/build/KBMobileBankingInterviewTest.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild archive -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -archivePath $PWD/build/KBMobileBankingInterviewTest.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
