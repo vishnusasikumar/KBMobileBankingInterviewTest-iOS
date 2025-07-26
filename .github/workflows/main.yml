@@ -56,12 +56,12 @@ jobs:
         run: |
           xcodebuild archive -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -archivePath $PWD/build/KBMobileBankingInterviewTest.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-      - name: Archive Build
-        run: |
-          xcodebuild -exportArchive -archivePath ./build/KBMobileBankingInterviewTest.xcarchive -exportPath ./build/ipa
+      # - name: Export Build
+      #   run: |
+      #     xcodebuild -exportArchive -archivePath ./build/KBMobileBankingInterviewTest.xcarchive -exportPath ./build/ipa
           
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: $PWD/build/KBMobileBankingInterviewTest.xcarchive
+      # - name: Upload Build Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build-artifact
+      #     path: $PWD/build/KBMobileBankingInterviewTest.xcarchive
