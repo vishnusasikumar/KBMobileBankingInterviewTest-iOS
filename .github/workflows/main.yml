@@ -40,11 +40,11 @@ jobs:
 
       - name: Build the Project
         run: |
-          xcodebuild clean build -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination -destination 'platform=iOS Simulator,name=iPhone 15 Pro' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild clean build -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15 Pro' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: Run Unit Tests
         run: |
-          xcodebuild test -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination -destination 'platform=iOS Simulator,name=iPhone 15 Pro' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
+          xcodebuild test -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15 Pro' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
