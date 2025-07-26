@@ -24,12 +24,12 @@ jobs:
         with:
           xcode-version: '16.2'
 
-     - name: Show current Xcode version
+      - name: Show current Xcode version
         run: |
           xcode-select -p
           xcodebuild -version
 
-     - name: Clean Derived Data
+      - name: Clean Derived Data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
       - name: Clean Xcode build
