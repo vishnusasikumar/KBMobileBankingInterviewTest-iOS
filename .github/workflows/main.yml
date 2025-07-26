@@ -1,0 +1,65 @@
+name: Manual iOS CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Xcode
+        uses: apple-actions/setup-xcode@v2
+        with:
+          xcode-version: '16.2'
+
+     - name: Show current Xcode version
+        run: |
+          xcode-select -p
+          xcodebuild -version
+
+     - name: Clean Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData
+
+      - name: Clean Xcode build
+        run: |
+          xcodebuild clean -project Cashpoints.xcodeproj -scheme Cashpoints-Staging
+
+      - name: Resolve Swift Package Dependencies
+        run: |
+          xcodebuild -resolvePackageDependencies
+
+      - name: Build the Project
+        run: |
+          xcodebuild clean build -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Run Unit Tests
+        run: |
+          xcodebuild test -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: result.log
+
+      - name: Archive Build
+        run: |
+          xcodebuild archive -workspace KBMobileBankingInterviewTest.xcworkspace -scheme KBMobileBankingInterviewTest -archivePath $PWD/build/KBMobileBankingInterviewTest.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: $PWD/build/KBMobileBankingInterviewTest.xcarchive
