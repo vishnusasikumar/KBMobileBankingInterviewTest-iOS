@@ -1,0 +1,67 @@
+name: Manual iOS CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Select Xcode 16.2
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+
+      - name: Show current Xcode version
+        run: |
+          xcode-select -p
+          xcodebuild -version
+
+      - name: Clean Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData
+
+      - name: Clean Xcode build
+        run: |
+          xcodebuild clean -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest
+
+      - name: Resolve Swift Package Dependencies
+        run: |
+          xcodebuild -resolvePackageDependencies
+
+      - name: Build the Project
+        run: |
+          xcodebuild clean build -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination generic/platform=iOS CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Run Unit Tests
+        run: |
+          xcodebuild test -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -sdk iphonesimulator -destination generic/platform=iOS CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | tee result.log | tail -n 10
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: result.log
+
+      - name: Archive Build
+        run: |
+          xcodebuild archive -project KBMobileBankingInterviewTest.xcodeproj -scheme KBMobileBankingInterviewTest -archivePath $PWD/build/KBMobileBankingInterviewTest.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      # - name: Export Build
+      #   run: |
+      #     xcodebuild -exportArchive -archivePath ./build/KBMobileBankingInterviewTest.xcarchive -exportPath ./build/ipa
+          
+      # - name: Upload Build Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build-artifact
+      #     path: $PWD/build/KBMobileBankingInterviewTest.xcarchive
